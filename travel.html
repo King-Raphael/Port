@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Travel · 旅行 | Raphael Peng</title>
+  <!-- 新增：引入 Google Font 'Inter' -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 复用同一个导航 -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="logo">
+        <a href="index.html">Raphael Peng</a>
+      </div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="series-wrapper page">
+    <div class="container series-header">
+      <p class="series-kicker">Travel · 旅行</p>
+      <h1 class="series-title">Cities and distances that stayed a bit longer.</h1>
+      <p class="series-subtitle-en">
+        A small selection of journeys — night ferries, mountain towns, trains and windows.
+        Less about destinations, more about the way light changes when you are far from home.
+      </p>
+      <p class="series-subtitle-zh">
+        一些被记住的路：夜里的渡轮、山间的小镇、车窗里的城市。
+        不是关于“去到哪里”，更像是在离开之后，光线也变得不太一样的那些时刻。
+      </p>
+    </div>
+
+    <section class="series-photos">
+      <!-- 照片 1 -->
+      <article class="photo-item">
+        <img src="images/travel-01.jpg" alt="Night skyline over river from ferry" />
+        <div class="photo-meta">
+          <p class="photo-line-main">
+            <span class="location">New York, 2024</span> — Crossing the river by night ferry.
+          </p>
+          <p class="photo-line-sub">
+            曼哈顿与布鲁克林之间的夜渡轮，城市在水面上被拉长了一点。
+          </p>
+          <p class="photo-line-gear">
+            Sony A7 III · 35mm f/1.4 · ISO 3200
+          </p>
+        </div>
+      </article>
+
+      <!-- 照片 2 -->
+      <article class="photo-item">
+        <img src="images/travel-02.jpg" alt="Foggy mountain village in the morning" />
+        <div class="photo-meta">
+          <p class="photo-line-main">
+            <span class="location">Guizhou, 2023</span> — A village slowly appearing from fog.
+          </p>
+          <p class="photo-line-sub">
+            雾散得很慢，小镇一点一点显出来，像有人在远处翻页。
+          </p>
+          <p class="photo-line-gear">
+            Sony A7 III · 55mm f/1.8 · ISO 400
+          </p>
+        </div>
+      </article>
+
+      <!-- 照片 3 -->
+      <article class="photo-item">
+        <img src="images/travel-03.jpg" alt="Train window with blurred city lights" />
+        <div class="photo-meta">
+          <p class="photo-line-main">
+            <span class="location">Tokyo, 2024</span> — City lights through a train window.
+          </p>
+          <p class="photo-line-sub">
+            车窗上的反光和外面的霓虹叠在一起，很难分清哪边才是真实。
+          </p>
+          <p class="photo-line-gear">
+            Sony A7 III · 25mm f/2 · ISO 1600
+          </p>
+        </div>
+      </article>
+
+      <!-- 你可以继续往下加更多 photo-item -->
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>© <span id="year"></span> Raphael Peng. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 页面淡入
+    const page = document.querySelector('.page');
+    if (page) {
+      window.addEventListener('load', () => {
+        requestAnimationFrame(() => {
+          page.classList.add('page--visible');
+        });
+      });
+    }
+  </script>
+</body>
+</html>

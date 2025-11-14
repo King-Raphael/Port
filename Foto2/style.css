@@ -188,6 +188,38 @@ body {
   margin: 0 0 0.5rem;
 }
 
+/* Hero 右上角的每张照片信息 */
+.hero-meta {
+  position: absolute;
+  top: 9%;
+  right: 6%;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.12rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 14px;
+  background: rgba(245, 241, 234, 0.72); /* 更淡的白底 */
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10); /* 比 hero-text 轻一点 */
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: right;
+}
+
+.hero-meta-title {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  color: var(--fg);
+}
+
+.hero-meta-line {
+  font-size: 0.78rem;
+  max-width: 14rem;
+  line-height: 1.4;
+}
+
 .hero-title {
   margin: 0;
   font-size: clamp(1.4rem, 3vw, 1.8rem);
