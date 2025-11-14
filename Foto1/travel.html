@@ -21,7 +21,7 @@
     </div>
   </header>
 
-  <main class="series-wrapper">
+  <main class="series-wrapper page">
     <div class="container series-header">
       <p class="series-kicker">Travel · 旅行</p>
       <h1 class="series-title">Cities and distances that stayed a bit longer.</h1>
@@ -96,6 +96,16 @@
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // 页面淡入
+    const page = document.querySelector('.page');
+    if (page) {
+      window.addEventListener('load', () => {
+        requestAnimationFrame(() => {
+          page.classList.add('page--visible');
+        });
+      });
+    }
   </script>
 </body>
 </html>

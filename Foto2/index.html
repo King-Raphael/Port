@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raphael Peng | Photography</title>
+  <!-- 新增：引入 Google Font 'Inter' -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="page-root">
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="logo">
+        <a href="index.html">Raphael Peng</a>
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- 全屏横图自动切换 -->
+    <section class="hero-slider">
+      <div class="hero-slides">
+        <!-- Slide 1 -->
+        <div class="hero-slide active">
+          <img src="images/hero-01.jpg" alt="Hero image 1" />
+          <div class="hero-text">
+            <p class="hero-kicker">Photography Portfolio</p>
+            <h1 class="hero-title">
+              Cities, people, and quiet lights<br />
+              framed in passing.
+            </h1>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="hero-slide">
+          <img src="images/hero-02.jpg" alt="Hero image 2" />
+          <div class="hero-text">
+            <p class="hero-kicker">Selected Work</p>
+            <h1 class="hero-title">
+              Travel, portrait, street,<br />
+              event and still life studies.
+            </h1>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="hero-slide">
+          <img src="images/hero-03.jpg" alt="Hero image 3" />
+          <div class="hero-text">
+            <p class="hero-kicker">Between Cities</p>
+            <h1 class="hero-title">
+              Frames that stayed<br />
+              a little longer in memory.
+            </h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-meta">
+        <span>Raphael Peng</span>
+        <span>New York · Shanghai</span>
+        <span>Photography · 2022–2025</span>
+      </div>
+    </section>
+
+    <section class="section hero-caption">
+      <div class="container">
+        <p class="hero-caption-text">
+          Selected works · 2022–2025
+        </p>
+      </div>
+    </section>
+
+    <!-- 类别：竖着平分的几条大块，每条是一个 link -->
+    <section class="categories">
+      <div class="container">
+        <div class="category-vertical-list">
+          <!-- Travel -->
+          <a href="travel.html" class="category-row">
+            <img src="images/travel-cover.jpg" alt="Travel cover" loading="lazy"/>
+            <div class="category-row-label">
+              <span class="category-name-en">Travel</span>
+              <span class="category-name-zh">旅行</span>
+            </div>
+          </a>
+
+          <!-- Portrait -->
+          <a href="portrait.html" class="category-row">
+            <img src="images/portrait-cover.jpg" alt="Portrait cover" />
+            <div class="category-row-label">
+              <span class="category-name-en">Portrait</span>
+              <span class="category-name-zh">人像</span>
+            </div>
+          </a>
+
+          <!-- Street -->
+          <a href="street.html" class="category-row">
+            <img src="images/street-cover.jpg" alt="Street cover" />
+            <div class="category-row-label">
+              <span class="category-name-en">Street</span>
+              <span class="category-name-zh">街拍</span>
+            </div>
+          </a>
+
+          <!-- Event -->
+          <a href="event.html" class="category-row">
+            <img src="images/event-cover.jpg" alt="Event cover" />
+            <div class="category-row-label">
+              <span class="category-name-en">Event</span>
+              <span class="category-name-zh">活动</span>
+            </div>
+          </a>
+
+          <!-- Still Life -->
+          <a href="still.html" class="category-row">
+            <img src="images/still-cover.jpg" alt="Still life cover" />
+            <div class="category-row-label">
+              <span class="category-name-en">Still Life</span>
+              <span class="category-name-zh">静物</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="section section-about">
+      <div class="container about-layout">
+        <div class="about-text">
+          <h2>About</h2>
+          <p class="about-en">
+            I'm Raphael (Boyan) Peng, a photographer and visual storyteller based between
+            New York and Shanghai. I move between travel diaries, portraits of friends,
+            street scenes, event documentation, and still life studies.
+          </p>
+          <p class="about-en">
+            This site is a small selection of work — not everything, just the images that
+            stayed with me a bit longer.
+          </p>
+          <p class="about-zh">
+            我是彭柏琰（Raphael），在纽约与上海之间游走的摄影师与影像创作者。
+            这里不是全部作品，只是一些暂时被留下的画面：旅行、人像、街拍、活动与静物。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section section-contact">
+      <div class="container">
+        <h2>Contact</h2>
+        <div class="contact-grid">
+          <div class="contact-block">
+            <h3>Email</h3>
+            <p><a href="mailto:your@email.com">your@email.com</a></p>
+          </div>
+          <div class="contact-block">
+            <h3>Social</h3>
+            <ul class="contact-list">
+              <li><a href="#" target="_blank" rel="noreferrer">Instagram</a></li>
+              <li><a href="#" target="_blank" rel="noreferrer">Xiaohongshu</a></li>
+              <li><a href="#" target="_blank" rel="noreferrer">Bilibili</a></li>
+            </ul>
+          </div>
+          <div class="contact-block">
+            <h3>Based in</h3>
+            <p>New York &amp; Shanghai</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>© <span id="year"></span> Raphael Peng. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // hero 轮播
+    const slides = document.querySelectorAll('.hero-slide');
+    let current = 0;
+
+    function showNextSlide() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }
+
+    if (slides.length > 1) {
+      setInterval(showNextSlide, 6000);
+    }
+
+    // 首页整页淡入
+    const root = document.querySelector('.page-root');
+    if (root) {
+      // 关闭浏览器自带的“记住滚动位置”
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+
+      window.addEventListener('load', () => {
+        // 强制回到页面顶部
+        window.scrollTo(0, 0);
+
+        // 再做淡入动画
+        requestAnimationFrame(() => {
+          root.classList.add('page-root--visible');
+        });
+      });
+    }
+
+    // 页面淡入 / 淡出
+    const page = document.querySelector('.page');
+
+    if (page) {
+      // 加载完成后淡入
+      window.addEventListener('load', () => {
+        requestAnimationFrame(() => {
+          page.classList.add('page--visible');
+        });
+      });
+
+      // 点击类别卡片时先淡出，再跳转
+      document.querySelectorAll('.category-row').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href');
+          // 忽略空链接、锚点、外链
+          if (!href || href.startsWith('#') || href.startsWith('http')) return;
+
+          e.preventDefault();
+          page.classList.add('page--hidden');
+
+          // 和 CSS 里的 260ms 对齐，略多给一点
+          setTimeout(() => {
+            window.location.href = href;
+          }, 280);
+        });
+      });
+    }
+  </script>
+
+</body>
+</html>
