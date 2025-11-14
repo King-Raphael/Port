@@ -1,0 +1,463 @@
+/* ===== 基础设置 ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #050509;
+  --bg-alt: #0b0f1a;
+  --fg: #f5f1ea;
+  --muted: #a4a8c0;
+  --accent: #f2d58a;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --radius-lg: 18px;
+  --radius-xl: 28px;
+  --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+  --transition-fast: 0.18s ease-out;
+  --transition-med: 0.28s ease-out;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Helvetica Neue", sans-serif;
+  background: radial-gradient(circle at top, #15182b 0, #050509 55%, #020308 100%);
+  color: var(--fg);
+  line-height: 1.6;
+}
+
+/* ===== 统一容器 ===== */
+.container {
+  width: min(1120px, 100% - 3rem);
+  margin: 0 auto;
+}
+
+/* ===== 导航栏 ===== */
+.site-header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 40;
+  background: linear-gradient(to bottom, rgba(3, 4, 10, 0.95), rgba(3, 4, 10, 0.7), transparent);
+  backdrop-filter: blur(18px);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: 0.8rem;
+}
+
+.logo a {
+  font-size: 1rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--fg);
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.12), transparent 55%);
+}
+
+.nav {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.nav a {
+  color: var(--muted);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 0.2rem;
+  transition: color var(--transition-fast);
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width var(--transition-fast);
+}
+
+.nav a:hover {
+  color: var(--fg);
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
+/* ===== Hero 区 ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 4.5rem; /* 给导航留空间 */
+  padding-bottom: 4rem;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(93, 130, 255, 0.18), transparent 55%),
+    radial-gradient(circle at 80% 70%, rgba(255, 180, 120, 0.12), transparent 50%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  max-width: 720px;
+}
+
+.hero-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.78rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+.hero-subtitle {
+  max-width: 32rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+  margin-bottom: 2rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+/* 按钮 */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.65rem 1.4rem;
+  font-size: 0.9rem;
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+    background var(--transition-fast), border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, #f2d58a, #f29b6d);
+  color: #1b1208;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+}
+
+.btn.primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.7);
+}
+
+.btn.ghost {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: var(--fg);
+}
+
+.btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* ===== 通用 section ===== */
+.section {
+  padding: 5rem 0;
+}
+
+.section-header {
+  margin-bottom: 2.5rem;
+}
+
+.section-header h2 {
+  font-size: 1.4rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+}
+
+.section-subtitle {
+  margin: 0;
+  color: var(--muted);
+  max-width: 30rem;
+  font-size: 0.96rem;
+}
+
+/* ===== Portfolio 区 ===== */
+.section-portfolio {
+  background: radial-gradient(circle at top, #101528 0, #050509 60%);
+}
+
+.category-block + .category-block {
+  margin-top: 3.5rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.category-header h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.category-tagline-en {
+  margin: 0 0 0.3rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.category-tagline-zh {
+  margin: 0.1rem 0 0.8rem;
+  color: rgba(231, 232, 243, 0.9);
+  font-size: 0.9rem;
+}
+
+/* 卡片网格 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.6rem;
+}
+
+.project-card {
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.14), transparent 55%),
+    rgba(6, 7, 14, 0.96);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-med), box-shadow var(--transition-med),
+    border-color var(--transition-med), background var(--transition-med);
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 65px rgba(0, 0, 0, 0.8);
+  border-color: rgba(242, 213, 138, 0.5);
+  background: radial-gradient(circle at top left, rgba(242, 213, 138, 0.14), transparent 55%),
+    rgba(6, 7, 14, 0.98);
+}
+
+.project-image {
+  position: relative;
+  overflow: hidden;
+  max-height: 260px;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform var(--transition-med);
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.04);
+}
+
+.project-meta {
+  padding: 1rem 1.1rem 1.15rem;
+}
+
+.project-meta h4 {
+  margin: 0 0 0.4rem;
+  font-size: 0.98rem;
+}
+
+.project-text-en,
+.project-text-zh {
+  margin: 0;
+  font-size: 0.86rem;
+}
+
+.project-text-en {
+  color: var(--muted);
+}
+
+.project-text-zh {
+  color: rgba(235, 235, 245, 0.92);
+  margin-top: 0.3rem;
+}
+
+/* ===== About 区 ===== */
+.section-about {
+  background: radial-gradient(circle at bottom, #15182b 0, #050509 55%);
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.5fr);
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.about-photo img {
+  width: 100%;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  object-fit: cover;
+}
+
+.section-about h2 {
+  font-size: 1.4rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.about-en,
+.about-zh {
+  font-size: 0.96rem;
+  margin: 0 0 0.9rem;
+  color: rgba(229, 229, 244, 0.96);
+}
+
+/* ===== Contact 区 ===== */
+.section-contact {
+  background: #050509;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.contact-block h3 {
+  margin: 0 0 0.4rem;
+  font-size: 0.96rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.contact-block p,
+.contact-block li {
+  margin: 0.1rem 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+}
+
+.contact-list a {
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.contact-list a:hover {
+  color: var(--accent);
+  border-color: rgba(242, 213, 138, 0.5);
+}
+
+.section-contact a[href^="mailto"] {
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  padding-bottom: 0.1rem;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.section-contact a[href^="mailto"]:hover {
+  color: var(--accent);
+  border-color: rgba(242, 213, 138, 0.7);
+}
+
+/* ===== 页脚 ===== */
+.site-footer {
+  border-top: 1px solid var(--border-subtle);
+  background: #04040a;
+  padding: 1.5rem 0;
+}
+
+.footer-content {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+  .nav {
+    gap: 1rem;
+    font-size: 0.82rem;
+  }
+
+  .hero {
+    padding-top: 4.4rem;
+  }
+
+  .hero-title {
+    font-size: 2.1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .hero-actions {
+    gap: 0.7rem;
+  }
+
+  .about-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .about-photo {
+    order: -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo a {
+    letter-spacing: 0.14em;
+    padding-inline: 0.6rem;
+  }
+
+  .nav {
+    gap: 0.7rem;
+  }
+
+  .section {
+    padding: 4rem 0;
+  }
+}

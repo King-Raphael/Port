@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raphael Peng | Photography</title>
+
+  <!-- 字体你可以改，这里用的是比较通用的一组 -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 顶部导航 -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <div class="logo">
+        <a href="#home">Raphael Peng</a>
+      </div>
+      <nav class="nav">
+        <a href="#home">Home</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 首页 Hero -->
+  <section id="home" class="hero">
+    <div class="hero-overlay"></div>
+    <!-- 背景图：你可以把 body 的背景换成纯色，这里默认用整页深色 + 微光 -->
+    <div class="container hero-content">
+      <p class="hero-kicker">Photography Portfolio</p>
+      <h1 class="hero-title">
+        Cities, people, and quiet lights<br />
+        framed in the dark.
+      </h1>
+      <p class="hero-subtitle">
+        Travel, portraits, streets, events, and stillness —  
+        a visual diary of the worlds I pass through.
+      </p>
+      <div class="hero-actions">
+        <a href="#portfolio" class="btn primary">View portfolio</a>
+        <a href="#about" class="btn ghost">About me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 作品集 -->
+  <section id="portfolio" class="section section-portfolio">
+    <div class="container">
+      <div class="section-header">
+        <h2>Portfolio</h2>
+        <p class="section-subtitle">
+          Selected work across travel, portraits, street photography, events, and still life.
+        </p>
+      </div>
+
+      <!-- Travel 旅行 -->
+      <div class="category-block">
+        <div class="category-header">
+          <h3>Travel</h3>
+          <p class="category-tagline-en">
+            Fragments of cities and landscapes that linger after leaving.
+          </p>
+          <p class="category-tagline-zh">
+            旅行 · 在离开之后仍停留在记忆里的城市与风景。
+          </p>
+        </div>
+        <div class="grid">
+          <!-- 每个项目卡片：你可以复制 / 删除 / 替换 -->
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/travel-01.jpg" alt="Night skyline over water" />
+            </div>
+            <div class="project-meta">
+              <h4>NYC Night Ferry</h4>
+              <p class="project-text-en">
+                A quiet crossing between boroughs, where skyscrapers dissolve into reflections.
+              </p>
+              <p class="project-text-zh">
+                城市与水面叠加的夜色，在渡轮的晃动中慢慢失焦。
+              </p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/travel-02.jpg" alt="Mountain village in the fog" />
+            </div>
+            <div class="project-meta">
+              <h4>Fog Village</h4>
+              <p class="project-text-en">
+                A mountain town half-hidden in mist, half-remembered in light.
+              </p>
+              <p class="project-text-zh">
+                被雾气吞没一半的小镇，另一半停在光里和记忆里。
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Portrait 人像 -->
+      <div class="category-block">
+        <div class="category-header">
+          <h3>Portrait</h3>
+          <p class="category-tagline-en">
+            Friends, strangers, and the subtle distance in between.
+          </p>
+          <p class="category-tagline-zh">
+            人像 · 朋友与陌生人，以及其间那些若即若离的瞬间。
+          </p>
+        </div>
+        <div class="grid">
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/portrait-01.jpg" alt="Portrait by the window" />
+            </div>
+            <div class="project-meta">
+              <h4>Window Light</h4>
+              <p class="project-text-en">
+                Soft afternoon light tracing the outline of a quiet conversation.
+              </p>
+              <p class="project-text-zh">
+                午后的窗边光线，勾勒出一场轻声对话的轮廓。
+              </p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/portrait-02.jpg" alt="Night portrait with neon" />
+            </div>
+            <div class="project-meta">
+              <h4>Neon Silence</h4>
+              <p class="project-text-en">
+                Color, blur, and the way a city holds someone for one brief second.
+              </p>
+              <p class="project-text-zh">
+                霓虹与虚焦，把一个人短暂地安放在城市的怀里。
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Street 街拍 -->
+      <div class="category-block">
+        <div class="category-header">
+          <h3>Street</h3>
+          <p class="category-tagline-en">
+            Crosswalks, reflections, fleeting gestures in public light.
+          </p>
+          <p class="category-tagline-zh">
+            街拍 · 斑马线、倒影，以及路人不经意的身姿。
+          </p>
+        </div>
+        <div class="grid">
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/street-01.jpg" alt="People crossing street at night" />
+            </div>
+            <div class="project-meta">
+              <h4>Crossing</h4>
+              <p class="project-text-en">
+                A frame between red and green, where no one is fully still.
+              </p>
+              <p class="project-text-zh">
+                红与绿之间的几秒钟，没有人真正停下。
+              </p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/street-02.jpg" alt="Reflections on rainy pavement" />
+            </div>
+            <div class="project-meta">
+              <h4>Rain Mirror</h4>
+              <p class="project-text-en">
+                Streetlights breaking into pieces on wet asphalt.
+              </p>
+              <p class="project-text-zh">
+                被雨水打碎在地面上的街灯，拼成一面临时的镜子。
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Event 活动 -->
+      <div class="category-block">
+        <div class="category-header">
+          <h3>Event</h3>
+          <p class="category-tagline-en">
+            Performances, talks, and the tension between stage and audience.
+          </p>
+          <p class="category-tagline-zh">
+            活动 · 舞台与观众之间的目光、灯光和情绪流动。
+          </p>
+        </div>
+        <div class="grid">
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/event-01.jpg" alt="Speaker on stage under spotlight" />
+            </div>
+            <div class="project-meta">
+              <h4>Under the Spotlight</h4>
+              <p class="project-text-en">
+                Academic rituals framed like theatre, with their own fragile intensity.
+              </p>
+              <p class="project-text-zh">
+                像戏剧一样被聚光灯框住的学术场景，认真而脆弱。
+              </p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/event-02.jpg" alt="Musicians performing on stage" />
+            </div>
+            <div class="project-meta">
+              <h4>Last Note</h4>
+              <p class="project-text-en">
+                Musicians suspended in the half-second before silence.
+              </p>
+              <p class="project-text-zh">
+                演出结束前那半秒，音符和呼吸都挂在空中。
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Still Life 静物 -->
+      <div class="category-block">
+        <div class="category-header">
+          <h3>Still Life</h3>
+          <p class="category-tagline-en">
+            Objects as small anchors of memory.
+          </p>
+          <p class="category-tagline-zh">
+            静物 · 把记忆暂时安放在物件里的方式。
+          </p>
+        </div>
+        <div class="grid">
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/still-01.jpg" alt="Coffee cup and notebook" />
+            </div>
+            <div class="project-meta">
+              <h4>Morning Desk</h4>
+              <p class="project-text-en">
+                Light on paper, coffee cooling beside unfinished thoughts.
+              </p>
+              <p class="project-text-zh">
+                阳光落在纸上，咖啡在未写完的句子旁边慢慢变凉。
+              </p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              <img src="images/still-02.jpg" alt="Flower in glass" />
+            </div>
+            <div class="project-meta">
+              <h4>Glass Bloom</h4>
+              <p class="project-text-en">
+                A single flower held in water and shadow.
+              </p>
+              <p class="project-text-zh">
+                一朵花，被水和阴影一起托住。
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section section-about">
+    <div class="container about-layout">
+      <div class="about-photo">
+        <!-- 放你的头像或背影照 -->
+        <img src="images/about-portrait.jpg" alt="Portrait of Raphael Peng" />
+      </div>
+      <div class="about-text">
+        <h2>About</h2>
+        <p class="about-en">
+          I'm Raphael (Boyan) Peng, a photographer and visual storyteller currently based between
+          New York and Shanghai. My work drifts between travel diaries, portraits of friends,
+          street scenes, event documentation, and quiet still life studies.
+        </p>
+        <p class="about-en">
+          I’m interested in how light sketches the edges of a city, and how small details — hands,
+          reflections, leftover chairs — can hold emotions that words often miss.
+        </p>
+        <p class="about-zh">
+          我是彭博炎（Raphael），在纽约与上海之间游走的摄影师与影像创作者。
+          我的作品在旅行、 人像、街拍、活动记录与静物之间穿梭，试图捕捉那些
+          不易被语言说清的小情绪、小瞬间。
+        </p>
+        <p class="about-zh">
+          我格外在意光线如何勾勒城市的边缘，也在意细节：一只手、一道倒影、
+          一排被遗留下来的椅子——它们常常替我们保管情绪。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section section-contact">
+    <div class="container">
+      <div class="section-header">
+        <h2>Contact</h2>
+        <p class="section-subtitle">
+          For collaborations, commissions, or just to say hi:
+        </p>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-block">
+          <h3>Email</h3>
+          <p><a href="mailto:fuyiboyan@gmail.com">fuyiboyan@gmail.com</a></p>
+        </div>
+        <div class="contact-block">
+          <h3>Social</h3>
+          <ul class="contact-list">
+            <li><a href="#" target="_blank" rel="noreferrer">Instagram</a></li>
+            <li><a href="#" target="_blank" rel="noreferrer">Xiaohongshu</a></li>
+            <li><a href="#" target="_blank" rel="noreferrer">Bilibili</a></li>
+          </ul>
+        </div>
+        <div class="contact-block">
+          <h3>Based in</h3>
+          <p>New York &amp; Shanghai</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <p>© <span id="year"></span> Raphael Peng. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // 自动年份
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
