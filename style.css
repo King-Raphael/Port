@@ -23,6 +23,17 @@ html {
   scroll-behavior: smooth;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg ...%3C/svg%3E");
+}
+
+
 body {
   margin: 0;
   /* 更新：使用 Inter 字体，回落到 system-ui */
@@ -119,6 +130,23 @@ body {
   overflow: hidden;
 }
 
+.hero-indicator {
+  position: absolute;
+  left: 7%;
+  top: 10%;
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  z-index: 2;
+}
+
+.hero-indicator-separator {
+  margin-inline: 0.25rem;
+  opacity: 0.6;
+}
+
+
 .hero-slides {
   position: relative;
   width: 100%;
@@ -153,19 +181,29 @@ body {
   flex-direction: column;
   align-items: flex-end;
   gap: 0.12rem;
-  padding: 0.6rem 0.9rem;
-  border-radius: 12px;
-  background: rgba(245, 241, 234, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.06);
-  font-size: 0.78rem;
-  color: var(--muted);
+  padding: 0.4rem 0.7rem; /* 小一点，不像一个“框” */
+  border-radius: 10px;
+
+  /* 背景基本“只剩一点点” */
+  background: rgba(245, 241, 234, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+
+  font-size: 0.76rem;
+  color: rgba(138, 132, 121, 0.85);
+  backdrop-filter: blur(2px); /* 可删可留，轻微磨砂感 */
 }
 
+
 .hero-meta span:first-child {
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-size: 0.74rem;
-  color: var(--fg);
+  font-size: 0.72rem;
+  color: rgba(22, 22, 22, 0.78); /* 标题稍微深一点但也不抢 */
+}
+
+/* 第二行（城市那行）更淡一点 */
+.hero-meta span + span {
+  opacity: 0.7;
 }
 
 /* 覆盖在图片上的文字 */
@@ -252,12 +290,14 @@ body {
 
 .hero-caption-text {
   margin: 0;
-  font-size: 0.8rem;
-  letter-spacing: 0.22em;
+  font-size: 0.78rem;
+  letter-spacing: 0.26em;
   text-transform: uppercase;
   text-align: center;
   color: var(--muted);
+  opacity: 0.85;
 }
+
 
 /* ===== 类别：一排竖向相纸感卡片 ===== */
 .categories {
@@ -266,6 +306,19 @@ body {
   /* 新增：增加顶部内边距，为错落布局提供空间 */
   padding-top: 5rem;
 }
+
+.category-index {
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* 让英文标题和编号之间有一点距离 */
+.category-row-label {
+  gap: 0.25rem;
+}
+
 
 .category-vertical-list {
   display: flex;
@@ -523,6 +576,45 @@ body {
 }
 
 /* ===== 系列详情页（travel.html 等复用） ===== */
+.series-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 220px) minmax(0, 1fr);
+  gap: 3rem;
+}
+
+/* 左侧信息栏固定 */
+.series-side-meta {
+  position: sticky;
+  top: 5.5rem; /* 让它在导航下方停住 */
+  align-self: flex-start;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.series-side-meta .series-title {
+  font-size: 1.1rem;
+  margin: 0.4rem 0 0.4rem;
+}
+
+.series-meta-small {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* 移动端：还是恢复成一列 */
+@media (max-width: 768px) {
+  .series-layout {
+    display: block;
+  }
+
+  .series-side-meta {
+    position: static;
+    margin-bottom: 1.4rem;
+  }
+}
+
+
 .series-wrapper {
   padding: 4.5rem 0 4rem;
 }
@@ -600,9 +692,8 @@ body {
 
 /* 图说：地点 + 内容 + 相机 */
 .photo-meta {
-  /* 更新：默认隐藏图说 */
   margin-top: 0;
-  font-size: 0.88rem;
+  font-size: 0.8rem;              /* 字再小一点 */
   opacity: 0;
   max-height: 0;
   transform: translateY(10px);
@@ -614,31 +705,41 @@ body {
     margin-top var(--transition-fast);
 }
 
-/* 新增：Hover 时显示图说 */
+/* Hover 时只微微浮出来 */
 .photo-item:hover .photo-meta {
-  opacity: 1;
-  max-height: 200px; /* 一个足够大的值 */
+  opacity: 0.28;                  /* 这里控制“基本看不出来”的程度 */
+  max-height: 200px;
   transform: translateY(0);
   margin-top: 0.6rem;
 }
 
-.photo-line-main {
-  color: var(--fg);
+/* 整体颜色更“灰” */
+.photo-line-main,
+.photo-line-sub,
+.photo-line-gear {
+  color: var(--muted);
 }
 
+/* 地点稍微有点强调，但也很轻 */
 .photo-line-main span.location {
   font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  opacity: 0.9;
 }
 
+/* 子标题和器材更淡一点 */
 .photo-line-sub {
-  color: var(--muted);
   margin-top: 0.15rem;
+  opacity: 0.8;
 }
 
 .photo-line-gear {
-  color: #6f695f;
   margin-top: 0.1rem;
+  opacity: 0.65;
 }
+
 
 /* ===== 页面淡入 / 淡出过渡 ===== */
 .page {

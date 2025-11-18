@@ -28,6 +28,11 @@
   <main class="page">
     <!-- 全屏横图自动切换 -->
     <section class="hero-slider">
+      <div class="hero-indicator">
+        <span id="hero-index">01</span>
+        <span class="hero-indicator-separator">/</span>
+        <span class="hero-indicator-total">03</span>
+      </div>
       <div class="hero-slides">
         <!-- Slide 1 -->
         <div class="hero-slide active">
@@ -83,7 +88,7 @@
     <section class="section hero-caption">
       <div class="container">
         <p class="hero-caption-text">
-          Selected works · 2022–2025
+          RAPHAEL PENG · New York / Shanghai · Photography 2022–2025
         </p>
       </div>
     </section>
@@ -96,6 +101,7 @@
           <a href="travel.html" class="category-row">
             <img src="images/travel-cover.jpg" alt="Travel cover" loading="lazy"/>
             <div class="category-row-label">
+              <span class="category-index">01</span>
               <span class="category-name-en">Travel</span>
               <span class="category-name-zh">旅行</span>
             </div>
@@ -105,6 +111,7 @@
           <a href="portrait.html" class="category-row">
             <img src="images/portrait-cover.jpg" alt="Portrait cover" />
             <div class="category-row-label">
+              <span class="category-index">02</span>
               <span class="category-name-en">Portrait</span>
               <span class="category-name-zh">人像</span>
             </div>
@@ -114,6 +121,7 @@
           <a href="street.html" class="category-row">
             <img src="images/street-cover.jpg" alt="Street cover" />
             <div class="category-row-label">
+              <span class="category-index">03</span>
               <span class="category-name-en">Street</span>
               <span class="category-name-zh">街拍</span>
             </div>
@@ -123,6 +131,7 @@
           <a href="event.html" class="category-row">
             <img src="images/event-cover.jpg" alt="Event cover" />
             <div class="category-row-label">
+              <span class="category-index">04</span>
               <span class="category-name-en">Event</span>
               <span class="category-name-zh">活动</span>
             </div>
@@ -132,6 +141,7 @@
           <a href="still.html" class="category-row">
             <img src="images/still-cover.jpg" alt="Still life cover" />
             <div class="category-row-label">
+              <span class="category-index">05</span>
               <span class="category-name-en">Still Life</span>
               <span class="category-name-zh">静物</span>
             </div>
@@ -201,13 +211,27 @@
     const slides = document.querySelectorAll('.hero-slide');
     let current = 0;
 
+    const heroIndexEl = document.getElementById('hero-index');
+    const heroTotalEl = document.querySelector('.hero-indicator-total');
+
+    if (heroTotalEl) {
+      heroTotalEl.textContent = String(slides.length).padStart(2, '0');
+    }
+
+    function updateHeroIndicator() {
+      if (!heroIndexEl) return;
+      heroIndexEl.textContent = String(current + 1).padStart(2, '0');
+    }
+
     function showNextSlide() {
       slides[current].classList.remove('active');
       current = (current + 1) % slides.length;
       slides[current].classList.add('active');
+      updateHeroIndicator();
     }
 
     if (slides.length > 1) {
+      updateHeroIndicator();
       setInterval(showNextSlide, 6000);
     }
 
