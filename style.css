@@ -195,10 +195,11 @@ body {
 
 
 .hero-meta span:first-child {
-  letter-spacing: 0.18em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  font-size: 0.72rem;
-  color: rgba(22, 22, 22, 0.78); /* 标题稍微深一点但也不抢 */
+  font-size: 0.74rem;
+  color: rgba(208, 205, 199, 0.96);      /* 接近卡片底色的暖白 */
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.35); /* 轻微描边，防止糊进背景 */
 }
 
 /* 第二行（城市那行）更淡一点 */
@@ -226,30 +227,12 @@ body {
   margin: 0 0 0.5rem;
 }
 
-/* Hero 右上角的每张照片信息 */
-.hero-meta {
-  position: absolute;
-  top: 9%;
-  right: 6%;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.12rem;
-  padding: 0.45rem 0.85rem;
-  border-radius: 14px;
-  background: rgba(245, 241, 234, 0.72); /* 更淡的白底 */
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10); /* 比 hero-text 轻一点 */
-  font-size: 0.78rem;
-  color: var(--muted);
-  text-align: right;
-}
-
 .hero-meta-title {
-  letter-spacing: 0.16em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  font-size: 0.72rem;
-  color: var(--fg);
+  font-size: 0.78rem;
+  color: rgba(220, 216, 216, 0.92);    /* 改成偏白的浅色 */
+  text-shadow: 0 0 6px rgba(216, 208, 208, 0.35);  /* 很轻的发光描边，防止吃进背景 */
 }
 
 .hero-meta-line {
@@ -364,7 +347,7 @@ body {
   height: 100%;
   display: block;
   object-fit: cover;
-  /* aspect-ratio: 3 / 4; */ /* 移除统一的比例 */
+  aspect-ratio: 4 / 5;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-subtle);
   box-shadow: var(--shadow-soft);
@@ -374,20 +357,11 @@ body {
   transition: transform 0.4s ease-out;
 }
 
-/* 新增：为每个卡片设置不同的 aspect-ratio */
-.category-row:nth-child(1) img {
-  aspect-ratio: 4 / 5;
-}
-.category-row:nth-child(2) img {
-  aspect-ratio: 3 / 4;
-}
-.category-row:nth-child(3) img {
-  /* 更新：移除 1:1 的方形，使其更接近其他比例 */
-  aspect-ratio: 5 / 6;
-}
-.category-row:nth-child(4) img {
-  aspect-ratio: 3 / 4;
-}
+/* 统一所有卡片的比例，让视觉更整齐 */
+.category-row:nth-child(1) img,
+.category-row:nth-child(2) img,
+.category-row:nth-child(3) img,
+.category-row:nth-child(4) img,
 .category-row:nth-child(5) img {
   aspect-ratio: 4 / 5;
 }
@@ -467,6 +441,20 @@ body {
 /* 新增：Hover 时显示遮罩层 */
 .category-row:hover::after {
   opacity: 1;
+}
+
+/* ===== Scroll reveal: elements fade/slide in ===== */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.85s ease-out,
+    transform 0.85s ease-out;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ===== 首页整页淡入过渡 ===== */
@@ -790,12 +778,12 @@ body {
   }
 
   .category-row img {
-    aspect-ratio: 3 / 4; /* 统一比例 */
+    aspect-ratio: 4 / 5; /* 统一比例 */
   }
 
   /* 新增：重置错落布局的比例 */
   .category-row:nth-child(n) img {
-    aspect-ratio: 3 / 4;
+    aspect-ratio: 4 / 5;
   }
 
   .series-wrapper {
