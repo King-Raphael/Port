@@ -23,14 +23,20 @@ html {
   scroll-behavior: smooth;
 }
 
+/* style.css */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  pointer-events: none;
-  mix-blend-mode: multiply;
-  opacity: 0.06;
-  background-image: url("data:image/svg+xml,%3Csvg ...%3C/svg%3E");
+  z-index: 9999;
+  pointer-events: none; /* 极其重要：确保鼠标能穿透它点击下面的内容 */
+  
+  /* 这里使用一个更明显的噪点纹理 */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+  
+  background-size: 150px; /* 噪点颗粒大小 */
+  opacity: 0.15; /* 先设为 0.15 让你一定能看见，确认看见后改为 0.05 或 0.03 */
+  mix-blend-mode: multiply; /* 正片叠底，让噪点融入背景色 */
 }
 
 
@@ -57,7 +63,10 @@ body {
   z-index: 20;
   background: rgba(245, 241, 234, 0.94);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-subtle);
+  /* 修改 border-bottom，让它更通透 */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  /* 新增：内部加一个半透明白色的内阴影，模拟玻璃厚度 */
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.4);  
 }
 
 .nav-container {
@@ -173,6 +182,36 @@ body {
   filter: saturate(1.05);
 }
 
+.scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%); /* 居中 */
+  z-index: 10;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0; /* 初始隐藏，等加载完再出来，或者直接设为 1 */
+  animation: fadeInOut 3s infinite;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.8), transparent);
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.3; transform: translate(-50%, 0); }
+  50% { opacity: 1; transform: translate(-50%, 5px); }
+}
+
 .hero-meta {
   position: absolute;
   right: 7%;
@@ -210,13 +249,30 @@ body {
 /* 覆盖在图片上的文字 */
 .hero-text {
   position: absolute;
-  left: 7%;
-  bottom: 16%;
-  max-width: 540px;
-  background: rgba(245, 241, 234, 0.86);
-  border-radius: 18px;
-  padding: 1rem 1.4rem 1.2rem;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+  left: 12%;
+  bottom: 12%;
+  width: 500px; /* 依然限制宽度，让文字换行好看 */
+  z-index: 2;
+  
+  /* === 核心修改：去掉了背景、边框、阴影 === */
+  background: transparent; 
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  
+  /* === 核心修改：文字颜色和阴影 === */
+  color: #fff; /* 变成白字（假设图片偏深）或者保持深色 */
+  
+  /* 关键：给文字加阴影，保证在任何背景下都看得清 */
+  /* 这种阴影是弥散的，不会显得脏 */
+  text-shadow: 0 2px 15px rgba(0,0,0,0.5); 
+}
+
+/* 针对这种风格，标题和正文颜色可能需要微调 */
+.hero-text p {
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.6); 
 }
 
 .hero-kicker {
@@ -245,6 +301,25 @@ body {
   margin: 0;
   font-size: clamp(1.4rem, 3vw, 1.8rem);
   line-height: 1.4;
+}
+
+/* 找到 .hero-text h1 或者直接加这个类 */
+.hero-title, 
+.series-title {
+  /* 核心改变：换成衬线体 */
+  font-family: "Playfair Display", serif;
+  
+  /* 设为斜体，这是高级感的关键 */
+  font-style: italic; 
+  
+  /* 不需要太粗，400 或者 500 足矣 */
+  font-weight: 400; 
+  
+  /* 稍微拉近一点字间距，让字母咬合更紧密，显得精致 */
+  letter-spacing: -0.02em; 
+  
+  /* 稍微调大行高，防止削头去尾 */
+  line-height: 1.2;
 }
 
 .hero-caption {
@@ -304,25 +379,11 @@ body {
 
 
 .category-vertical-list {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  /* 更新：改为 flex-start 以便 transform 生效 */
-  align-items: flex-start;
-  gap: 1.6rem;
-}
-
-.category-row {
-  position: relative;
-  display: block;
-  flex: 1 1 0;
-  text-decoration: none;
-  color: inherit;
-  /* 新增：添加 overflow: hidden 以便遮罩层能正确显示圆角 */
-  overflow: hidden;
-  border-radius: var(--radius-lg);
-  /* 新增：为 transform 添加过渡 */
-  transition: transform 0.4s ease-out;
+  display: grid;
+  /* 自动填充列，最小宽度 200px */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  align-items: start; /* 顶部对齐，方便做错落 */
 }
 
 /* 新增：为错落布局添加单独的 transform */
@@ -348,9 +409,6 @@ body {
   display: block;
   object-fit: cover;
   aspect-ratio: 4 / 5;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-subtle);
-  box-shadow: var(--shadow-soft);
   filter: saturate(0.98);
   will-change: transform;
   /* 更新：更改过渡效果为 transform */
@@ -364,18 +422,6 @@ body {
 .category-row:nth-child(4) img,
 .category-row:nth-child(5) img {
   aspect-ratio: 4 / 5;
-}
-
-/* 新增：为类别卡片添加半透明遮罩层 (默认隐藏) */
-.category-row::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  transition: opacity var(--transition-med);
-  /* 确保遮罩层不影响鼠标事件 */
-  pointer-events: none;
 }
 
 /* 图片下方中置的小标签像贴在相纸上 */
@@ -425,7 +471,6 @@ body {
 .category-row:hover img {
   /* 更新：改为放大，移除上浮 */
   transform: scale(1.03);
-  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.16);
 }
 
 /* 新增：修复 hover 时文字不显示的 bug */
@@ -438,10 +483,87 @@ body {
   transform: translateY(-8px);
 }
 
-/* 新增：Hover 时显示遮罩层 */
-.category-row:hover::after {
+/* style.css 末尾新增/修改 */
+
+/* 1. 容器设置：增加 mask-image 强制修复 Safari 圆角失效问题 */
+.category-img-wrap {
+  /* ...原有属性保留... */
+  position: relative;
+  width: 100%;
+  border-radius: 12px; /* 确保有圆角 */
+  overflow: hidden;
+  
+  /* 核心修复：强制浏览器按圆角裁剪所有子元素（包括光效和遮罩） */
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black); 
+
+  /* 阴影加在这里 */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0,0,0,0.04);
+  
+  transform: translate3d(0, 0, 0);
+  transition: box-shadow 0.5s ease, transform 0.5s ease;
+}
+
+/* 2. 光效层 (保持不变，用 ::before) */
+.category-img-wrap::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  /* 你的光效代码 */
+  background: linear-gradient(
+    to right, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.1) 20%, 
+    rgba(255, 255, 255, 0.3) 50%, 
+    rgba(255, 255, 255, 0.1) 80%, 
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  z-index: 10; /* 光在最上面 */
+  pointer-events: none;
+  transition: none;
+}
+
+/* 3. 【新增】黑色遮罩层 (用 ::after) */
+/* 现在它在 category-img-wrap 里面，会被圆角裁剪！ */
+.category-img-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25); /* 稍微调淡一点点，更通透 */
+  opacity: 0; /* 默认隐藏 */
+  transition: opacity 0.4s ease;
+  z-index: 5; /* 在光效下面，图片上面 */
+  pointer-events: none;
+}
+
+/* 4. Hover 交互汇总 */
+
+/* 容器阴影变深 */
+.category-row:hover .category-img-wrap {
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18);
+}
+
+/* 图片放大 */
+.category-row:hover .category-img-wrap img {
+  transform: scale(1.05);
+}
+
+/* 光效扫过 */
+.category-row:hover .category-img-wrap::before {
+  left: 150%;
+  transition: left 1.4s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+/* 【新增】遮罩层淡入 */
+.category-row:hover .category-img-wrap::after {
   opacity: 1;
 }
+
 
 /* ===== Scroll reveal: elements fade/slide in ===== */
 .reveal-on-scroll {
@@ -812,4 +934,15 @@ body {
   .photo-item {
     margin-bottom: 2.4rem;
   }
+}
+
+/* 仅在非移动端添加错落效果 */
+@media (min-width: 769px) {
+  .category-row:nth-child(even) {
+    margin-top: 3rem; /* 偶数项下沉 */
+  }
+  .category-row:nth-child(odd) {
+    margin-top: 0;
+  }
+  /* 移除原有的 transform translateY */
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,8 +9,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body class="page-root">
   <!-- 顶部导航 -->
   <header class="site-header">
@@ -18,7 +22,7 @@
         <a href="index.html">Raphael Peng</a>
       </div>
       <nav class="nav">
-        <a href="index.html" class="active">Home</a>
+        <a href="index.html" class="active">Home</a>http://127.0.0.1:5500/images/hero-03.jpg
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -36,7 +40,7 @@
       <div class="hero-slides">
         <!-- Slide 1 -->
         <div class="hero-slide active">
-          <img src="images/hero-01.jpg" alt="Hero image 1" />
+          <img src="images/hero-01.jpg" alt="Hero image 1" fetchpriority="high" loading="eager" />
           <div class="hero-text">
             <p class="hero-kicker">Photography Portfolio</p>
             <h1 class="hero-title">
@@ -52,7 +56,7 @@
 
         <!-- Slide 2 -->
         <div class="hero-slide">
-          <img src="images/hero-02.jpg" alt="Hero image 2" />
+          <img src="images/hero-02.jpg" alt="Hero image 2" loading="lazy" />
           <div class="hero-text">
             <p class="hero-kicker">Selected Work</p>
             <h1 class="hero-title">
@@ -68,7 +72,7 @@
 
         <!-- Slide 3 -->
         <div class="hero-slide">
-          <img src="images/hero-03.jpg" alt="Hero image 3" />
+          <img src="images/hero-03.jpg" alt="Hero image 3" loading="lazy" />
           <div class="hero-text">
             <p class="hero-kicker">Between Cities</p>
             <h1 class="hero-title">
@@ -82,13 +86,16 @@
           </div>
         </div>
       </div>
-
+      <!-- <div class="scroll-hint">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+      </div> -->
     </section>
 
     <section class="section hero-caption">
       <div class="container">
         <p class="hero-caption-text">
-          RAPHAEL PENG · New York / Shanghai · Photography 2022–2025
+          RAPHAEL PENG · Photography 2022 – 2025
         </p>
       </div>
     </section>
@@ -99,7 +106,9 @@
         <div class="category-vertical-list">
           <!-- Travel -->
           <a href="travel.html" class="category-row reveal-on-scroll">
-            <img src="images/travel-cover.jpg" alt="Travel cover" loading="lazy"/>
+            <div class="category-img-wrap">
+              <img src="images/travel-cover.jpg" alt="Travel cover" loading="lazy" />
+            </div>
             <div class="category-row-label">
               <span class="category-index">01</span>
               <span class="category-name-en">Travel</span>
@@ -109,7 +118,9 @@
 
           <!-- Portrait -->
           <a href="portrait.html" class="category-row reveal-on-scroll">
-            <img src="images/portrait-cover.jpg" alt="Portrait cover" />
+            <div class="category-img-wrap">
+              <img src="images/portrait-cover.jpg" alt="Portrait cover" />
+            </div>
             <div class="category-row-label">
               <span class="category-index">02</span>
               <span class="category-name-en">Portrait</span>
@@ -119,7 +130,9 @@
 
           <!-- Street -->
           <a href="street.html" class="category-row reveal-on-scroll">
-            <img src="images/street-cover.jpg" alt="Street cover" />
+            <div class="category-img-wrap">
+              <img src="images/street-cover.jpg" alt="Street cover" />
+            </div>
             <div class="category-row-label">
               <span class="category-index">03</span>
               <span class="category-name-en">Street</span>
@@ -129,7 +142,9 @@
 
           <!-- Event -->
           <a href="event.html" class="category-row reveal-on-scroll">
-            <img src="images/event-cover.jpg" alt="Event cover" />
+            <div class="category-img-wrap">
+              <img src="images/event-cover.jpg" alt="Event cover" />
+            </div>
             <div class="category-row-label">
               <span class="category-index">04</span>
               <span class="category-name-en">Event</span>
@@ -139,7 +154,9 @@
 
           <!-- Still Life -->
           <a href="still.html" class="category-row reveal-on-scroll">
-            <img src="images/still-cover.jpg" alt="Still life cover" />
+            <div class="category-img-wrap">
+              <img src="images/still-cover.jpg" alt="Still life cover" />
+            </div>
             <div class="category-row-label">
               <span class="category-index">05</span>
               <span class="category-name-en">Still Life</span>
@@ -185,8 +202,10 @@
             <h3>Social</h3>
             <ul class="contact-list">
               <li><a href="#" target="_blank" rel="noreferrer">Instagram</a></li>
-              <li><a href="https://www.xiaohongshu.com/user/profile/5f0745550000000001002111" target="_blank" rel="noreferrer">Xiaohongshu</a></li>
-              <li><a href="https://space.bilibili.com/286403219?spm_id_from=333.1365.0.0" target="_blank" rel="noreferrer">Bilibili</a></li>
+              <li><a href="https://www.xiaohongshu.com/user/profile/5f0745550000000001002111" target="_blank"
+                  rel="noreferrer">Xiaohongshu</a></li>
+              <li><a href="https://space.bilibili.com/286403219?spm_id_from=333.1365.0.0" target="_blank"
+                  rel="noreferrer">Bilibili</a></li>
             </ul>
           </div>
           <div class="contact-block reveal-on-scroll">
@@ -232,7 +251,22 @@
 
     if (slides.length > 1) {
       updateHeroIndicator();
-      setInterval(showNextSlide, 6000);
+
+      // 定义一个变量来存储定时器
+      let slideInterval = setInterval(showNextSlide, 6000);
+
+      // 获取轮播区域容器
+      const sliderContainer = document.querySelector('.hero-slider');
+
+      // 鼠标移入：清除定时器（暂停）
+      sliderContainer.addEventListener('mouseenter', () => {
+        clearInterval(slideInterval);
+      });
+
+      // 鼠标移出：重新开始定时器
+      sliderContainer.addEventListener('mouseleave', () => {
+        slideInterval = setInterval(showNextSlide, 6000);
+      });
     }
 
     // 首页整页淡入
@@ -266,19 +300,26 @@
       });
 
       // 点击类别卡片时先淡出，再跳转
+      // index.html 脚本部分优化
       document.querySelectorAll('.category-row').forEach(link => {
         link.addEventListener('click', (e) => {
           const href = link.getAttribute('href');
-          // 忽略空链接、锚点、外链
           if (!href || href.startsWith('#') || href.startsWith('http')) return;
 
-          e.preventDefault();
-          page.classList.add('page--hidden');
-
-          // 和 CSS 里的 260ms 对齐，略多给一点
-          setTimeout(() => {
-            window.location.href = href;
-          }, 280);
+          // 如果支持 View Transitions (Chrome/Edge 111+)
+          if (document.startViewTransition) {
+            e.preventDefault();
+            document.startViewTransition(() => {
+              window.location.href = href;
+            });
+          } else {
+            // 降级处理：原有的淡出逻辑，但建议时间改短
+            e.preventDefault();
+            page.classList.add('page--hidden');
+            setTimeout(() => {
+              window.location.href = href;
+            }, 200); // 稍微缩短
+          }
         });
       });
     }
@@ -304,4 +345,5 @@
   </script>
 
 </body>
+
 </html>
