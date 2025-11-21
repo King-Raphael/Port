@@ -129,6 +129,11 @@ body {
   width: 100%;
 }
 
+.nav a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 /* ===== 首页：横图轮播 ===== */
 .hero-slider {
   position: relative;
@@ -182,6 +187,22 @@ body {
   filter: saturate(1.05);
 }
 
+/* 在 hero-slide img 后面加一个伪元素遮罩 */
+.hero-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  /* 只有底部变黑一点点，保证文字清晰，但不会让整张图变暗 */
+  background: linear-gradient(
+    to top, 
+    rgba(0, 0, 0, 0.4) 0%, 
+    rgba(0, 0, 0, 0.1) 30%, 
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1; /* 在图片之上，文字之下 */
+}
+
 .scroll-hint {
   position: absolute;
   bottom: 2rem;
@@ -210,6 +231,74 @@ body {
 @keyframes fadeInOut {
   0%, 100% { opacity: 0.3; transform: translate(-50%, 0); }
   50% { opacity: 1; transform: translate(-50%, 5px); }
+}
+
+/* 1. 指示器容器：居中悬浮在底部 */
+.hero-pagination {
+  position: absolute;
+  bottom: 3rem; /* 根据你的喜好调整高度 */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px; /* 点与点之间的间距 */
+  z-index: 10;
+  pointer-events: auto; /* 允许点击 */
+}
+
+/* style.css */
+
+/* 1. 定义“随时间变短”的动画 */
+@keyframes timerShrink {
+  0% {
+    width: 48px; /* 初始宽度：长条 */
+  }
+  100% {
+    width: 6px;  /* 结束宽度：圆点 */
+  }
+}
+
+/* 2. 基础圆点样式 */
+.hero-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.3); /* 未选中时比较暗 */
+  cursor: pointer;
+  position: relative;
+  /* 取消原来的 transition，因为我们要用 animation */
+  transition: background-color 0.3s ease; 
+}
+
+/* 增加点击热区 */
+.hero-dot::after {
+  content: "";
+  position: absolute;
+  top: -10px; bottom: -10px; left: -10px; right: -10px;
+}
+
+/* 3. 激活状态：执行倒计时动画 */
+.hero-dot.active {
+  background-color: #ffffff; /* 激活时变亮 */
+  
+  /* 关键配置：
+     timerShrink: 动画名称
+     6s: 持续时间 (必须必须和 JS 里的定时器时间一致！)
+     linear: 线性匀速 (倒计时通常是匀速的)
+     forwards: 动画结束后保持最后的状态
+  */
+  animation: timerShrink 6000ms linear forwards;
+}
+
+/* 4. Hover 效果：未选中的点鼠标放上去变亮 */
+.hero-dot:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* 5. 极其实用的细节：鼠标悬停在轮播图上时，暂停进度条 */
+/* 因为 JS 里我们写了鼠标悬停会 clearInterval，视觉上也必须暂停，否则就穿帮了 */
+.hero-slider:hover .hero-dot.active {
+  animation-play-state: paused;
 }
 
 .hero-meta {
@@ -408,7 +497,7 @@ body {
   height: 100%;
   display: block;
   object-fit: cover;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 4;
   filter: saturate(0.98);
   will-change: transform;
   /* 更新：更改过渡效果为 transform */
@@ -421,7 +510,7 @@ body {
 .category-row:nth-child(3) img,
 .category-row:nth-child(4) img,
 .category-row:nth-child(5) img {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 3 / 4;
 }
 
 /* 图片下方中置的小标签像贴在相纸上 */
@@ -525,7 +614,7 @@ body {
   transform: skewX(-25deg);
   z-index: 10; /* 光在最上面 */
   pointer-events: none;
-  transition: none;
+  transition: transform 0.9s ease; /* 光斑更慢一点 */
 }
 
 /* 3. 【新增】黑色遮罩层 (用 ::after) */
@@ -551,6 +640,10 @@ body {
 /* 图片放大 */
 .category-row:hover .category-img-wrap img {
   transform: scale(1.05);
+}
+
+.category-img-wrap img {
+  transition: transform 0.6s ease; /* 稍微慢一点 */
 }
 
 /* 光效扫过 */
@@ -580,7 +673,7 @@ body {
 }
 
 /* ===== 首页整页淡入过渡 ===== */
-.page-root {
+/* .page-root {
   opacity: 0;
   transform: translateY(8px);
   transition: opacity 320ms ease-out, transform 320ms ease-out;
@@ -589,7 +682,7 @@ body {
 .page-root--visible {
   opacity: 1;
   transform: translateY(0);
-}
+} */
 
 /* ===== 通用 section ===== */
 .section {
