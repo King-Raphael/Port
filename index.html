@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Raphael Peng | Photography</title>
+  <title>Boyan Peng | Photography</title>
   <!-- 新增：引入 Google Font 'Inter' -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,7 @@
   <header class="site-header">
     <div class="container nav-container">
       <div class="logo">
-        <a href="index.html">Raphael Peng</a>
+        <a href="index.html">Boyan Peng</a>
       </div>
       <nav class="nav">
         <a href="index.html" class="active">Home</a>
@@ -97,7 +97,7 @@
     <section class="section hero-caption">
       <div class="container">
         <p class="hero-caption-text">
-          RAPHAEL PENG · Photography 2022 – 2025
+          BOYAN PENG · Photography 2022 – 2025
         </p>
       </div>
     </section>
@@ -221,93 +221,68 @@
 
   <footer class="site-footer">
     <div class="container footer-content">
-      <p>© <span id="year"></span> Raphael Peng. All rights reserved.</p>
+      <p>© <span id="year"></span> Boyan Peng. All rights reserved.</p>
     </div>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // --- 替换原来的 Hero 轮播逻辑 ---
-
-    // ==========================================
-    // Hero 轮播逻辑 (修复计时器同步 Bug 版)
-    // ==========================================
+    // Hero 轮播逻辑（不再因为 hover 暂停）
     const slides = document.querySelectorAll('.hero-slide');
     const paginationContainer = document.querySelector('.hero-pagination');
-    const sliderContainer = document.querySelector('.hero-slider');
-    
-    let currentSlide = 0;
-    let slideInterval;
-    let isPaused = false; // 新增：专门记录鼠标是否悬停
 
-    // 1. 初始化圆点
+    let currentSlide = 0;
+    let slideTimer = null;
+
+    // 1. 初始化底部圆点
     if (slides.length > 0 && paginationContainer) {
       slides.forEach((_, index) => {
         const dot = document.createElement('div');
         dot.classList.add('hero-dot');
         if (index === 0) dot.classList.add('active');
-        
-        // 点击事件
-        dot.addEventListener('click', () => {
-          // 如果点的就是当前这张，什么都不做（防止动画重置闪烁）
-          if (currentSlide === index) return;
-          goToSlide(index);
-        });
-        
         paginationContainer.appendChild(dot);
       });
     }
 
     const dots = document.querySelectorAll('.hero-dot');
 
-    // 2. 核心切换函数
-    function goToSlide(n) {
-      // 移除当前状态
+    // 2. 切换到指定某一张
+    function goToSlide(index) {
+      if (!slides.length) return;
+
+      // 移除当前
       slides[currentSlide].classList.remove('active');
       if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
 
-      // 计算下一张索引
-      currentSlide = (n + slides.length) % slides.length;
+      // 计算新索引（支持循环）
+      currentSlide = (index + slides.length) % slides.length;
 
-      // 激活下一张
+      // 激活新的一张
       slides[currentSlide].classList.add('active');
       if (dots[currentSlide]) dots[currentSlide].classList.add('active');
-
-      // === 关键修复逻辑 ===
-      // 切换图片后，先不管三七二十一，把旧的定时器杀掉
-      clearInterval(slideInterval);
-
-      // 只有当鼠标【没悬停】的时候，才开始新的倒计时！
-      // 如果鼠标还在上面，就让它停着，等鼠标移开触发 mouseleave 才会开始计时
-      if (!isPaused) {
-        slideInterval = setInterval(showNextSlide, 6000);
-      }
     }
 
-    function showNextSlide() {
-      goToSlide(currentSlide + 1);
+    // 3. 自动轮播
+    function startAuto() {
+      if (slides.length <= 1) return;
+      clearInterval(slideTimer);
+      slideTimer = setInterval(() => {
+        goToSlide(currentSlide + 1);
+      }, 6000); // 要和 CSS 里的 6000ms 对齐
     }
 
-    // 3. 启动与暂停控制
-    if (slides.length > 1) {
-      // 初始启动
-      slideInterval = setInterval(showNextSlide, 6000);
-
-      // 鼠标移入：标记暂停，清除定时器
-      sliderContainer.addEventListener('mouseenter', () => {
-        isPaused = true;
-        clearInterval(slideInterval);
+    // 4. 底部圆点点击
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        if (currentSlide === index) return; // 点自己就不动
+        goToSlide(index);
+        startAuto(); // 点击之后重新开始计时
       });
+    });
 
-      // 鼠标移出：标记恢复，重新开始定时器
-      sliderContainer.addEventListener('mouseleave', () => {
-        isPaused = false;
-        // 防止多重触发，先清一次
-        clearInterval(slideInterval);
-        slideInterval = setInterval(showNextSlide, 6000);
-      });
-    }
+    // 初始启动
+    startAuto();
 
     // 页面淡入 / 淡出 (增强版：防止白屏)
     const page = document.querySelector('.page');

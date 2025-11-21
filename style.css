@@ -73,12 +73,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-block: 0.9rem;
+  padding-block: 0.7rem;
 }
 
 .logo a {
-  font-size: 0.98rem;
-  letter-spacing: 0.18em;
+  font-size: 0.9rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--fg);
@@ -295,11 +295,11 @@ body {
   background-color: rgba(255, 255, 255, 0.8);
 }
 
-/* 5. 极其实用的细节：鼠标悬停在轮播图上时，暂停进度条 */
+/* 5. 极其实用的细节：鼠标悬停在轮播图上时，暂停进度条
 /* 因为 JS 里我们写了鼠标悬停会 clearInterval，视觉上也必须暂停，否则就穿帮了 */
-.hero-slider:hover .hero-dot.active {
+/* .hero-slider:hover .hero-dot.active {
   animation-play-state: paused;
-}
+} */
 
 .hero-meta {
   position: absolute;
@@ -411,38 +411,58 @@ body {
   line-height: 1.2;
 }
 
+/* ===== Hero 底部那一条标语 ===== */
+
 .hero-caption {
-  padding: 2rem 0 1rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.9)
+  );
+  border-top: 1px solid rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  padding: 2.4rem 0 2.4rem;
+  text-align: center; /* 让中间这块整体居中 */
+  animation: captionFadeUp 700ms ease-out 420ms both;
 }
 
-.hero-caption::before {
-  content: "";
-  display: block;
-  width: 56px;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.16);
-  margin: 0 auto 0.5rem;
-  position: relative;
+@keyframes captionFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+/* 不再用整个 section 的 before / after 画线和点 */
+.hero-caption::before,
 .hero-caption::after {
-  content: "";
-  display: block;
-  width: 4px;
-  height: 4px;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.22);
-  margin: 0.1rem auto 0;
+  content: none;
 }
 
 .hero-caption-text {
   margin: 0;
-  font-size: 0.78rem;
+  display: inline-flex;          /* 文字 + 两边细线 */
+  align-items: center;
+  gap: 2.25rem;                   /* 文字和线之间留一点呼吸 */
+  font-size: 0.8rem;
+  line-height: 1.6;
   letter-spacing: 0.26em;
   text-transform: uppercase;
-  text-align: center;
-  color: var(--muted);
-  opacity: 0.85;
+  color: rgba(0, 0, 0, 0.48);    /* 比原来更淡一点 */
+  opacity: 0.95;
+}
+
+/* 左右各一条细线 */
+.hero-caption-text::before,
+.hero-caption-text::after {
+  content: "";
+  height: 1px;
+  width: 128px;
+  background: rgba(0, 0, 0, 0.12);  /* 非常淡的灰线 */
 }
 
 
