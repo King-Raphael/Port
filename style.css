@@ -1104,6 +1104,21 @@ body {
   .hero-pagination {
     bottom: 1.1rem;   /* 原来是 3rem，这里往下挪贴近图片底部 */
   }
+
+    /* 手机端：hero caption 居中 + 去掉两边细线，避免视觉偏右 */
+  .hero-caption-text {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    line-height: 1.8;
+    padding: 0 1.5rem;      /* 两边留一点安全距离 */
+    text-align: center;
+  }
+
+  .hero-caption-text::before,
+  .hero-caption-text::after {
+    display: none;          /* 小屏上不画那两条线了 */
+  }
 }
 
 @media (min-width: 769px) {
