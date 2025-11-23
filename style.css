@@ -15,6 +15,7 @@
   --radius-md: 8px;
   --radius-lg: 10px;
   --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 24px 55px rgba(0, 0, 0, 0.14);
   --transition-fast: 0.18s ease-out;
   --transition-med: 0.26s ease-out;
 }
@@ -35,7 +36,7 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
   
   background-size: 150px; /* 噪点颗粒大小 */
-  opacity: 0.15; /* 先设为 0.15 让你一定能看见，确认看见后改为 0.05 或 0.03 */
+  opacity: 0.06;
   mix-blend-mode: multiply; /* 正片叠底，让噪点融入背景色 */
 }
 
@@ -52,7 +53,7 @@ body {
 
 /* ===== 统一容器 ===== */
 .container {
-  width: min(1120px, 100% - 3rem);
+  width: min(1200px, 100% - 3rem);
   margin: 0 auto;
 }
 
@@ -405,10 +406,10 @@ body {
   font-weight: 400; 
   
   /* 稍微拉近一点字间距，让字母咬合更紧密，显得精致 */
-  letter-spacing: -0.02em; 
+  letter-spacing: 0.02em; 
   
   /* 稍微调大行高，防止削头去尾 */
-  line-height: 1.2;
+  line-height: 1.3;
 }
 
 /* ===== Hero 底部那一条标语 ===== */
@@ -468,48 +469,104 @@ body {
 
 /* ===== 类别：一排竖向相纸感卡片 ===== */
 .categories {
-  padding: 3rem 0 4rem;
+  padding: 4rem 0 4.5rem;
   border-top: 1px solid var(--border-subtle);
-  /* 新增：增加顶部内边距，为错落布局提供空间 */
-  padding-top: 5rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.2)
+  );
 }
 
-.category-index {
-  font-size: 0.72rem;
-  letter-spacing: 0.24em;
+.section-header {
+  max-width: 760px;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+
+.section-kicker {
+  margin: 0 0 0.5rem;
   text-transform: uppercase;
-  opacity: 0.8;
+  letter-spacing: 0.26em;
+  font-size: 0.76rem;
+  color: var(--muted);
 }
 
-/* 让英文标题和编号之间有一点距离 */
-.category-row-label {
-  gap: 0.25rem;
+.section-title {
+  margin: 0 0 0.4rem;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 1.7rem;
+  letter-spacing: -0.01em;
 }
 
+.section-subtitle {
+  margin: 0;
+  color: #4c453b;
+  font-size: 1rem;
+  line-height: 1.7;
+}
 
 .category-vertical-list {
   display: grid;
-  /* 自动填充列，最小宽度 200px */
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  align-items: start; /* 顶部对齐，方便做错落 */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.8rem;
 }
 
-/* 新增：为错落布局添加单独的 transform */
-.category-row:nth-child(1) {
-  transform: translateY(0);
+.category-row {
+  position: relative;
+  display: block;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
 }
-.category-row:nth-child(2) {
-  transform: translateY(-2rem); /* 拉起 */
+
+.category-row:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
-.category-row:nth-child(3) {
-  transform: translateY(1rem); /* 降下 */
+
+.category-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
+  box-shadow: none;
+  border: none;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.5s ease, filter 0.4s ease;
 }
-.category-row:nth-child(4) {
-  transform: translateY(-3rem); /* 拉起更多 */
+
+.category-img-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.08) 30%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+  z-index: 1;
+  opacity: 0.9;
+  pointer-events: none;
 }
-.category-row:nth-child(5) {
-  transform: translateY(0.5rem); /* 略微降下 */
+
+.category-img-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.14), transparent 40%);
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
 }
 
 .category-row img {
@@ -517,164 +574,109 @@ body {
   height: 100%;
   display: block;
   object-fit: cover;
-  aspect-ratio: 3 / 4;
-  filter: saturate(0.98);
-  will-change: transform;
-  /* 更新：更改过渡效果为 transform */
-  transition: transform 0.4s ease-out;
+  aspect-ratio: 4 / 5;
+  filter: saturate(0.96);
+  transition: transform 0.5s ease;
 }
 
-/* 统一所有卡片的比例，让视觉更整齐 */
-.category-row:nth-child(1) img,
-.category-row:nth-child(2) img,
-.category-row:nth-child(3) img,
-.category-row:nth-child(4) img,
-.category-row:nth-child(5) img {
-  aspect-ratio: 3 / 4;
-}
-
-/* 图片下方中置的小标签像贴在相纸上 */
 .category-row-label {
   position: absolute;
-  left: 50%;
-  /* 更新：垂直居中 */
-  top: 50%;
-  /* 更新：使用 transform 居中 */
-  transform: translate(-50%, -50%);
-  padding: 0.35rem 1rem;
-  /* 更新：移除背景、边框和阴影 */
-  /* background: rgba(245, 241, 234, 0.96); */
-  /* border: 1px solid rgba(0, 0, 0, 0.06); */
-  /* box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); */
-  display: inline-flex;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 1rem 1.1rem 1.2rem;
+  display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.15rem;
-  text-align: center;
-  pointer-events: none;
-  /* 更新：默认透明，添加过渡 */
-  opacity: 0;
-  transition: opacity var(--transition-med);
-  /* 更新：文字颜色改为白色，添加阴影 */
+  gap: 0.4rem;
   color: #fff;
-  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
-  /* 提高层级确保在遮罩层之上 */
-  z-index: 2;
+  z-index: 3;
+}
+
+.category-label-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;   /* 数字和标题底部对齐 */
+  gap: 0.8rem;
+  min-height: 3.1rem;      /* 固定一个高度，两行/一行都能塞下 */
+}
+
+.category-index {
+  font-size: 0.74rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  opacity: 0.9;
 }
 
 .category-name-en {
-  /* 更新：放大字体，增加字距 */
-  font-size: 1.1rem;
-  letter-spacing: 0.2em;
+  font-size: 1.15rem; /* 稍微减小一点字体 (原 1.2rem)，防止过大 */
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 600;
+
+  display: block;
+  text-align: right;
+  
+  /* 修改核心：增加最大宽度限制，或者直接使用百分比 */
+  max-width: 15ch;     /* 从 10ch 改为 15ch，容纳 "Installation" 等长词 */
+  
+  line-height: 1.3;
+  
+  /* 新增：防止长单词（如 Installation）强行溢出容器 */
+  overflow-wrap: break-word; 
+  word-break: break-word;
 }
 
-.category-name-zh {
-  /* 更新：放大字体，调整颜色 */
-  font-size: 1rem;
+/* 字比较多的标题，用稍微小一点的版本 */
+.category-name-en.is-long {
+  font-size: 1.02rem;         /* 稍微小一点 */
+  letter-spacing: 0.11em;     /* 字距收紧一点，不那么“散” */
+}
+
+.category-label-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.98rem;
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* hover：相纸微微浮起，标签跟着一起轻轻抬起 */
-.category-row:hover img {
-  /* 更新：改为放大，移除上浮 */
-  transform: scale(1.03);
+.category-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.86rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-/* 新增：修复 hover 时文字不显示的 bug */
-.category-row:hover .category-row-label {
-  opacity: 1;
+.category-cta::after {
+  content: "→";
+  font-size: 0.92rem;
+  transition: transform 0.3s ease;
 }
 
-/* 更新：悬停时，重置错落布局的 transform，并额外上浮 */
 .category-row:hover {
-  transform: translateY(-8px);
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-card);
+  border-color: rgba(0, 0, 0, 0.08);
 }
 
-/* style.css 末尾新增/修改 */
-
-/* 1. 容器设置：增加 mask-image 强制修复 Safari 圆角失效问题 */
-.category-img-wrap {
-  /* ...原有属性保留... */
-  position: relative;
-  width: 100%;
-  border-radius: 12px; /* 确保有圆角 */
-  overflow: hidden;
-  
-  /* 核心修复：强制浏览器按圆角裁剪所有子元素（包括光效和遮罩） */
-  -webkit-mask-image: -webkit-radial-gradient(white, black);
-  mask-image: radial-gradient(white, black); 
-
-  /* 阴影加在这里 */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  border: 1px solid rgba(0,0,0,0.04);
-  
-  transform: translate3d(0, 0, 0);
-  transition: box-shadow 0.5s ease, transform 0.5s ease;
-}
-
-/* 2. 光效层 (保持不变，用 ::before) */
-.category-img-wrap::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 50%;
-  height: 100%;
-  /* 你的光效代码 */
-  background: linear-gradient(
-    to right, 
-    transparent 0%, 
-    rgba(255, 255, 255, 0.1) 20%, 
-    rgba(255, 255, 255, 0.3) 50%, 
-    rgba(255, 255, 255, 0.1) 80%, 
-    transparent 100%
-  );
-  transform: skewX(-25deg);
-  z-index: 10; /* 光在最上面 */
-  pointer-events: none;
-  transition: transform 0.9s ease; /* 光斑更慢一点 */
-}
-
-/* 3. 【新增】黑色遮罩层 (用 ::after) */
-/* 现在它在 category-img-wrap 里面，会被圆角裁剪！ */
-.category-img-wrap::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.25); /* 稍微调淡一点点，更通透 */
-  opacity: 0; /* 默认隐藏 */
-  transition: opacity 0.4s ease;
-  z-index: 5; /* 在光效下面，图片上面 */
-  pointer-events: none;
-}
-
-/* 4. Hover 交互汇总 */
-
-/* 容器阴影变深 */
 .category-row:hover .category-img-wrap {
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.18);
+  transform: scale(1.01);
+  filter: saturate(1.02);
 }
 
-/* 图片放大 */
-.category-row:hover .category-img-wrap img {
+.category-row:hover img {
   transform: scale(1.05);
 }
 
-.category-img-wrap img {
-  transition: transform 0.6s ease; /* 稍微慢一点 */
-}
-
-/* 光效扫过 */
-.category-row:hover .category-img-wrap::before {
-  left: 150%;
-  transition: left 1.4s cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-/* 【新增】遮罩层淡入 */
 .category-row:hover .category-img-wrap::after {
-  opacity: 1;
+  opacity: 0.9;
+}
+
+.category-row:hover .category-cta::after {
+  transform: translateX(4px);
 }
 
 
@@ -788,6 +790,47 @@ body {
 .section-contact a[href^="mailto"]:hover {
   color: var(--accent);
   border-color: rgba(184, 132, 59, 0.6);
+}
+
+.contact-cta-wrap {
+  margin-top: 2.2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.contact-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.85rem 1.4rem;
+  background: #161616;
+  color: #fff;
+  text-decoration: none;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  border-radius: 999px;
+  transition: transform 0.25s ease, box-shadow 0.3s ease, background 0.3s ease;
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.14);
+}
+
+.contact-cta:hover {
+  transform: translateY(-2px);
+  background: #1f1b15;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+}
+
+.contact-cta::after {
+  content: "→";
+  font-size: 0.95rem;
+}
+
+.contact-cta-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
 }
 
 /* ===== 页脚 ===== */
@@ -999,26 +1042,17 @@ body {
     max-width: none;
   }
 
+  .categories {
+    padding: 3.5rem 0 3.8rem;
+  }
+
   .category-vertical-list {
-    flex-wrap: wrap;
-    /* 新增：重置错落布局 */
-    padding-top: 0;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
   }
 
   .category-row {
-    flex: 1 1 calc(50% - 0.9rem);
-    margin-bottom: 1.8rem;
-    /* 新增：重置错落布局 */
-    transform: translateY(0) !important;
-  }
-
-  .category-row img {
-    aspect-ratio: 4 / 5; /* 统一比例 */
-  }
-
-  /* 新增：重置错落布局的比例 */
-  .category-row:nth-child(n) img {
-    aspect-ratio: 4 / 5;
+    border-radius: 12px;
   }
 
   .series-wrapper {
@@ -1040,8 +1074,16 @@ body {
     padding-inline: 0.7rem;
   }
 
-  .category-row {
-    flex: 1 1 100%;
+  .section-title {
+    font-size: 1.4rem;
+  }
+
+  .category-row-label {
+    padding: 0.85rem 1rem 1rem;
+  }
+
+  .category-name-en {
+    font-size: 1.05rem;
   }
 
   .photo-item {
@@ -1049,13 +1091,8 @@ body {
   }
 }
 
-/* 仅在非移动端添加错落效果 */
 @media (min-width: 769px) {
-  .category-row:nth-child(even) {
-    margin-top: 3rem; /* 偶数项下沉 */
-  }
-  .category-row:nth-child(odd) {
+  .category-row + .category-row {
     margin-top: 0;
   }
-  /* 移除原有的 transform translateY */
 }
