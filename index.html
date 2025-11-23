@@ -377,6 +377,107 @@
     // 初始启动
     startAuto();
 
+        // 初始启动
+    startAuto();
+
+    // 5. 滑动 / 拖拽切换（移动端 + 电脑端）
+    const heroSection = document.querySelector('.hero-slider');
+
+    if (heroSection && slides.length > 1) {
+      let startX = 0;
+      let startY = 0;
+      let isPointerDown = false;
+      let isHorizontalSwipe = false;
+      const SWIPE_THRESHOLD = 40; // 需要滑动的最小距离
+
+      heroSection.addEventListener('pointerdown', (e) => {
+        // 电脑端只处理左键拖拽；触屏不限制
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+        isPointerDown = true;
+        isHorizontalSwipe = false;
+        startX = e.clientX;
+        startY = e.clientY;
+      });
+
+      heroSection.addEventListener('pointermove', (e) => {
+        if (!isPointerDown) return;
+
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+
+        // 横向位移明显大于纵向，才算是左右滑
+        if (Math.abs(dx) > Math.abs(dy)) {
+          isHorizontalSwipe = true;
+        }
+      });
+
+      heroSection.addEventListener('pointerup', (e) => {
+        if (!isPointerDown) return;
+        isPointerDown = false;
+
+        if (!isHorizontalSwipe) return;
+
+        const dx = e.clientX - startX;
+
+        if (Math.abs(dx) > SWIPE_THRESHOLD) {
+          if (dx < 0) {
+            // 向左滑 / 向左拖 —— 下一张
+            goToSlide(currentSlide + 1);
+          } else {
+            // 向右滑 / 向右拖 —— 上一张
+            goToSlide(currentSlide - 1);
+          }
+          startAuto(); // 切换后重新开始自动轮播
+        }
+
+        isHorizontalSwipe = false;
+      });
+
+      // 鼠标拖出区域时取消本次滑动
+      heroSection.addEventListener('pointerleave', () => {
+        isPointerDown = false;
+        isHorizontalSwipe = false;
+      });
+
+      // 触控板两指左右滑（wheel 横向滚动）也切换
+      let wheelLocked = false;
+      let wheelTimer = null;
+      const WHEEL_THRESHOLD = 30; // 横向滚动超过多少像素才触发
+
+      heroSection.addEventListener(
+        'wheel',
+        (e) => {
+          // 如果垂直滚动更大，就当正常滚动用，直接返回
+          if (Math.abs(e.deltaY) >= Math.abs(e.deltaX)) return;
+
+          // 防止一滑切好多张：在短时间内只响应一次
+          if (wheelLocked) return;
+
+          if (Math.abs(e.deltaX) > WHEEL_THRESHOLD) {
+            // 不让浏览器尝试横向滚动
+            e.preventDefault();
+
+            if (e.deltaX > 0) {
+              // 往右推手势：下一张
+              goToSlide(currentSlide + 1);
+            } else {
+              // 往左推手势：上一张
+              goToSlide(currentSlide - 1);
+            }
+            startAuto();
+
+            wheelLocked = true;
+            clearTimeout(wheelTimer);
+            wheelTimer = setTimeout(() => {
+              wheelLocked = false;
+            }, 500); // 0.5 秒内只触发一次
+          }
+        },
+        { passive: false }
+      );
+    }
+
     // 页面淡入 / 淡出 (增强版：防止白屏)
     const page = document.querySelector('.page');
 
