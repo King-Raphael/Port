@@ -594,16 +594,10 @@ body {
 
 .category-label-top {
   display: flex;
-<<<<<<< HEAD
   justify-content: space-between;
   align-items: flex-end;   /* 数字和标题底部对齐 */
   gap: 0.8rem;
   min-height: 3.1rem;      /* 固定一个高度，两行/一行都能塞下 */
-=======
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.8rem;
->>>>>>> 1fa053f1b3f80dc8835712a6a871089c3c080e65
 }
 
 .category-index {
@@ -614,7 +608,6 @@ body {
 }
 
 .category-name-en {
-<<<<<<< HEAD
   font-size: 1.15rem; /* 稍微减小一点字体 (原 1.2rem)，防止过大 */
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -639,14 +632,6 @@ body {
   letter-spacing: 0.11em;     /* 字距收紧一点，不那么“散” */
 }
 
-=======
-  font-size: 1.2rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 600;
-}
-
->>>>>>> 1fa053f1b3f80dc8835712a6a871089c3c080e65
 .category-label-bottom {
   display: flex;
   align-items: center;
@@ -1110,8 +1095,4 @@ body {
   .category-row + .category-row {
     margin-top: 0;
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 1fa053f1b3f80dc8835712a6a871089c3c080e65
