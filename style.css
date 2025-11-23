@@ -1089,6 +1089,21 @@ body {
   .photo-item {
     margin-bottom: 2.4rem;
   }
+
+    /* 手机端：hero 文案整体居中 */
+  .hero-text {
+    left: 50%;
+    right: auto;
+    bottom: 13%;
+    transform: translateX(-50%);
+    width: min(92vw, 420px);
+    text-align: center;
+  }
+
+    /* 手机端：轮播的小圆点靠近图像底边一点，不要挡文案 */
+  .hero-pagination {
+    bottom: 1.1rem;   /* 原来是 3rem，这里往下挪贴近图片底部 */
+  }
 }
 
 @media (min-width: 769px) {
