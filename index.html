@@ -84,10 +84,65 @@
           </div>
           <div class="hero-meta">
             <span class="hero-meta-title">Architecture · Morning</span>
-            <span class="hero-meta-line">Jingdezhen · 2025 · Hotel in an old porcelain factory</span>
+            <span class="hero-meta-line">Jingdezhen · 2025 · ChuanShang Xing</span>
+          </div>
+        </div>
+
+        <!-- 现有的三张 Slide 在这里 -->
+
+        <!-- Slide 4：森林倒影 · 双重自我 -->
+        <div class="hero-slide">
+          <img src="images/hero-04.jpg" alt="Figure sitting above a mirrored forest lake" fetchpriority="high"
+            loading="eager" decoding="async" />
+          <div class="hero-text">
+            <p class="hero-kicker">Forest · Mirror Lake</p>
+            <h1 class="hero-title">
+              One body, two reflections,<br />
+              between fog and the first light.
+            </h1>
+          </div>
+          <div class="hero-meta">
+            <span class="hero-meta-title">Portrait · Mist</span>
+            <span class="hero-meta-line">Shanghai · 2024 · Gongqing Forest Park</span>
+          </div>
+        </div>
+
+        <!-- Slide 5：湖中城堡 · 山水之间 -->
+        <div class="hero-slide">
+          <img src="images/hero-05.jpg" alt="Castle on a rock island surrounded by lake and mountains"
+            fetchpriority="high" loading="eager" decoding="async" />
+          <div class="hero-text">
+            <p class="hero-kicker">Lake · Castle</p>
+            <h1 class="hero-title">
+              A borrowed castle on a rock,<br />
+              floating between mountains and water.
+            </h1>
+          </div>
+          <div class="hero-meta">
+            <span class="hero-meta-title">Travel · Aerial</span>
+            <span class="hero-meta-line">Xingyi · 2023 · Jilong Castle</span>
+          </div>
+        </div>
+
+        <!-- Slide 6：吊灯与书海 · 玻璃鹿 -->
+        <div class="hero-slide">
+          <img src="images/hero-06.jpg" alt="Crystal chandeliers above a glass deer in a bookstore" fetchpriority="high"
+            loading="eager" decoding="async" />
+          <div class="hero-text">
+            <p class="hero-kicker">Bookstore · Glass Deer</p>
+            <h1 class="hero-title">
+              Crystal lights above a sea of shelves,<br />
+              a deer made of bubbles watching them glow.
+            </h1>
+          </div>
+          <div class="hero-meta">
+            <span class="hero-meta-title">Still Life · Light</span>
+            <span class="hero-meta-line">Shanghai · 2024 · ZiWU</span>
           </div>
         </div>
       </div>
+
+
       <!-- <div class="scroll-hint">
         <span>Scroll</span>
         <div class="scroll-line"></div>
@@ -327,7 +382,7 @@
     (function () {
       const track = document.querySelector('.hero-slides');
       const heroSection = document.querySelector('.hero-slider');
-      const baseSlides = Array.from(document.querySelectorAll('.hero-slide'));
+      const baseSlides = Array.from(track.querySelectorAll('.hero-slide'));
       const paginationContainer = document.querySelector('.hero-pagination');
 
       if (!track || !heroSection || baseSlides.length === 0) return;
